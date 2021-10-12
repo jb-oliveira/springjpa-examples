@@ -6,6 +6,8 @@ import com.jboliveira.springjpa.orm.UnidadeTrabalho;
 import com.jboliveira.springjpa.repository.CargoRepository;
 import com.jboliveira.springjpa.repository.FuncionarioRepository;
 import com.jboliveira.springjpa.repository.UnidadeTrabalhoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -52,7 +54,7 @@ public class CrudFuncionarioService {
                     atualizar(scanner);
                     break;
                 case 3:
-                    visualizar();
+                    visualizar(scanner);
                     break;
                 case 4:
                     deletar(scanner);
@@ -148,9 +150,16 @@ public class CrudFuncionarioService {
         System.out.println("Alterado");
     }
 
-    private void visualizar() {
-        Iterable<Funcionario> funcionarios = funcionarioRepository.findAll();
-        funcionarios.forEach(System.out::println);
+    private void visualizar(Scanner scanner) {
+        System.out.println("Qual pagina deseja visualizar?");
+        int pageNum = scanner.nextInt();
+
+        PageRequest pageRequest = PageRequest.of(pageNum, 5);
+        Page<Funcionario> page = funcionarioRepository.findAll(pageRequest);
+        System.out.println(page);
+        System.out.println("PAgina atual: " + page.getNumber());
+        System.out.println("Total Elementos: " + page.getTotalElements());
+        page.getContent().forEach(System.out::println);
     }
 
     private void deletar(Scanner scanner) {
