@@ -1,9 +1,6 @@
 package com.jboliveira.springjpa;
 
-import com.jboliveira.springjpa.service.CrudCargoService;
-import com.jboliveira.springjpa.service.CrudFuncionarioService;
-import com.jboliveira.springjpa.service.CrudUnidadeTrabalhoService;
-import com.jboliveira.springjpa.service.RelatoriosService;
+import com.jboliveira.springjpa.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,14 +22,18 @@ public class SpringJpaApplication implements CommandLineRunner {
 
     private final CrudUnidadeTrabalhoService unidadeTrabalhoService;
 
+    private final RelatorioFuncionarioDinamico relatorioFuncionarioDinamico;
+
     public SpringJpaApplication(CrudCargoService cargoService,
                                 RelatoriosService relatoriosService,
                                 CrudFuncionarioService funcionarioService,
-                                CrudUnidadeTrabalhoService unidadeTrabalhoService) {
+                                CrudUnidadeTrabalhoService unidadeTrabalhoService,
+                                RelatorioFuncionarioDinamico relatorioFuncionarioDinamico) {
         this.cargoService = cargoService;
         this.relatoriosService = relatoriosService;
         this.funcionarioService = funcionarioService;
         this.unidadeTrabalhoService = unidadeTrabalhoService;
+        this.relatorioFuncionarioDinamico = relatorioFuncionarioDinamico;
     }
 
     public static void main(String[] args) {
@@ -50,6 +51,7 @@ public class SpringJpaApplication implements CommandLineRunner {
             System.out.println("2 - Funcionario");
             System.out.println("3 - Unidade");
             System.out.println("4 - Relatorios");
+            System.out.println("5 - Relatorio Dinamico");
 
 
             int function = scanner.nextInt();
@@ -66,6 +68,9 @@ public class SpringJpaApplication implements CommandLineRunner {
                     break;
                 case 4:
                     relatoriosService.inicial(scanner);
+                    break;
+                case 5:
+                    relatorioFuncionarioDinamico.inicial(scanner);
                     break;
                 default:
                     System.out.println("Finalizando");

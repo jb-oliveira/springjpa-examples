@@ -93,8 +93,6 @@ public class Funcionario {
                 ", cpf='" + cpf + '\'' +
                 ", salario=" + salario +
                 ", dataContratacao=" + dataContratacao +
-                ", cargo=" + cargo +
-                ", unidades=" + unidades +
                 '}';
     }
 }

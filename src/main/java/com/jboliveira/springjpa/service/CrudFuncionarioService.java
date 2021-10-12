@@ -8,6 +8,7 @@ import com.jboliveira.springjpa.repository.FuncionarioRepository;
 import com.jboliveira.springjpa.repository.UnidadeTrabalhoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -154,7 +155,8 @@ public class CrudFuncionarioService {
         System.out.println("Qual pagina deseja visualizar?");
         int pageNum = scanner.nextInt();
 
-        PageRequest pageRequest = PageRequest.of(pageNum, 5);
+        Sort sort = Sort.by(Sort.Order.asc("nome"), Sort.Order.desc("salario"));
+        PageRequest pageRequest = PageRequest.of(pageNum, 5, sort);
         Page<Funcionario> page = funcionarioRepository.findAll(pageRequest);
         System.out.println(page);
         System.out.println("PAgina atual: " + page.getNumber());
