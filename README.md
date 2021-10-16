@@ -1,2 +1,2 @@
 # springjpa-examples
-Examples using spring jpa
+Simple CLI application using spring jpa
